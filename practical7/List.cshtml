@@ -1,0 +1,123 @@
+﻿@model IEnumerable<eedbackApp.Models.Feedback>
+@{
+    ViewBag.Title = "View Feedbacks";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>All Submitted Feedbacks</title>
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 40%, #764ba2 100%);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #4a4a4a;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            background: #1e3a8a;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+            .btn-back:hover {
+                background: #6d28d9;
+            }
+
+        .empty-state {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <!-- Back button wapas form par jane ke liye -->
+        <a href="/Feedback" class="btn-back">← Back to Form</a>
+        <h2>All Submitted Feedbacks</h2>
+
+        <!-- Check karte hain ki koi data hai ya nahi -->
+        @if (Model != null && Model.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email Address</th>
+                        <th>Feedback Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop lagakar sabhi feedbacks table mein dikhayenge -->
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            <td>@item.Comments</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="empty-state">
+                <p>No feedbacks have been submitted yet. Go back and submit one!</p>
+            </div>
+        }
+    </div>
+</body>
+</html>
